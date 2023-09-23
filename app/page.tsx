@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 export default function Home() {
-  return <div>tests</div>;
+  return <div className="container relative">tests</div>;
 }
