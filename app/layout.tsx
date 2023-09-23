@@ -5,6 +5,8 @@ import "@/styles/global.css";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { ModeToggle } from "@/components/mode-toggle";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -28,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
@@ -36,16 +38,19 @@ export default function RootLayout({
           fontHeading.variable
         )}
       >
-        <div className="container mx-auto ">
-          <div className="flex flex-col lg:flex-row flex-wrap lg:justify-center py-6 lg:py-10">
-            <aside className="bg-white-600 px-2 w-1/4">
-              <div className="sticky top-0 w-full p-4 text-center">
-                <Link href="/">Ryan Tong</Link>
-              </div>
-            </aside>
-            <main className="px-6 w-full md:max-w-3xl">{children}</main>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          <div className="container mx-auto ">
+            <div className="flex flex-col lg:flex-row flex-wrap lg:justify-center py-6 lg:py-10">
+              <aside className="bg-white-600 px-2 w-1/4">
+                <div className="sticky top-0 w-full p-4 text-center">
+                  <Link href="/">Ryan Tong</Link>
+                  <ModeToggle />
+                </div>
+              </aside>
+              <main className="px-6 w-full md:max-w-3xl">{children}</main>
+            </div>
           </div>
-        </div>
+        </ThemeProvider>
       </body>
     </html>
   );
