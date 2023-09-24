@@ -35,7 +35,7 @@ export function Profile() {
           {" · "}
           <Link
             className="hover:underline"
-            href="https://www.dropbox.com/s/7rqcoog9h6zmu7m/BaoTong-Resume-v0.1.pdf?dl=1"
+            href="https://www.dropbox.com/scl/fi/wbtzomyd090hwdwlnruf7/RyanTong-Resume-v1.0.pdf?rlkey=1g1oz2fucmt1h9zxvy4xcsz8w&dl=1"
           >
             Resume <Icons.download className="inline-block h-3 w-3" />
           </Link>
