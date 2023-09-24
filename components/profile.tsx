@@ -1,0 +1,45 @@
+import Link from "next/link";
+import Image from "next/image";
+import { ModeToggle } from "./mode-toggle";
+import { Icons } from "./icons";
+import { Button } from "./ui/button";
+
+export function Profile() {
+  return (
+    <div className="flex flex-col items-center ">
+      <Link href="/" className="text-2xl">
+        Ryan Tong
+      </Link>
+      <div className="w-32 h-32 m-4">
+        <Image
+          src="/images/avatars/ryantong.jpg"
+          alt="Ryan Tong"
+          width="150"
+          height="150"
+          className="rounded-full"
+        />
+      </div>
+      <div className="mt-6 space-y-7 text-sm text-slate-400">
+        <p>
+          I am a software engineer based in Sydney. Learning about scalable
+          webapp.
+        </p>
+        <p>
+          <Link href="https://github.com/tongxuanbao">
+            <Button variant="ghost" size="sm" className="px-1 h-[32px]">
+              <Icons.github className="h-6 w-6 text-curentColor" />
+              <span className="sr-only">Github</span>
+            </Button>
+          </Link>
+          <Link href="https://www.linkedin.com/in/baotongxuan/">
+            <Button variant="ghost" size="sm" className="h-8 w-8 px-0">
+              <Icons.linkedin className="" />
+              <span className="sr-only">Toggle theme</span>
+            </Button>
+          </Link>
+          <ModeToggle />
+        </p>
+      </div>
+    </div>
+  );
+}

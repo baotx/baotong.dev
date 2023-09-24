@@ -22,6 +22,7 @@ import {
   Trash,
   Twitter,
   User,
+  Linkedin,
   X,
   type IconNode,
 } from "lucide-react";
@@ -50,7 +51,7 @@ export const Icons = {
   sun: SunMedium,
   moon: Moon,
   laptop: Laptop,
-  gitHub: ({ ...props }: LucideProps) => (
+  github: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"
       focusable="false"
@@ -69,4 +70,5 @@ export const Icons = {
   ),
   twitter: Twitter,
   check: Check,
+  linkedin: Linkedin,
 };
