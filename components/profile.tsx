@@ -19,7 +19,7 @@ export function Profile() {
           className="rounded-full"
         />
       </div>
-      <div className="mt-6 space-y-7 text-sm text-slate-600 dark:text-slate-300">
+      <div className="mt-6 space-y-7 text-sm text-muted-foreground">
         <p>
           <Link className="hover:underline" href="/about">
             About

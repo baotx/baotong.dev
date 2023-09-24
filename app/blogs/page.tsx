@@ -11,12 +11,12 @@ export default async function Page() {
           className="group relative border-solid border-2 rounded-md bg-secondary p-4"
         >
           <header className="pb-4">
-            <h1>{post.title}</h1>
-            <small className="text-slate-600 dark:text-slate-500">
+            <h1 className="text-xl font-medium tracking-tight">{post.title}</h1>
+            <small className="text-muted-foreground">
               {formatDate(post.date)}
             </small>
           </header>
-          <p className="text-sm">{post.description}</p>
+          <p className="text-sm text-muted-foreground">{post.description}</p>
           <Link
             href={`/blog/${post.slugAsParams}`}
             className="absolute inset-0"
