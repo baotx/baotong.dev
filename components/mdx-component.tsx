@@ -6,8 +6,6 @@ import { useMDXComponent } from "next-contentlayer/hooks";
 import { cn } from "@/lib/utils";
 import { Callout } from "@/components/callout";
 import { MdxCard } from "@/components/mdx-card";
-import { Icons } from "./icons";
-import { Link } from "lucide-react";
 
 const components: MDXComponents = {
   h1: ({ className, ...props }) => (
@@ -151,7 +149,7 @@ const components: MDXComponents = {
     />
   ),
   // Image,
-  Image: (props: ImageProps) => <NextImage {...props} />,
+  Image: (props: ImageProps) => <NextImage className="py-4" {...props} />,
   Callout,
   Card: MdxCard,
 };

@@ -1,0 +1,41 @@
+---
+title: Creating a food delivery service simulator
+description: A longterm educatonal project using Go, React
+date: "2023-09-13"
+---
+
+<Callout>
+  This is inspired by an article by Gergely Orosz titled ['An Educational Side
+  Project,'](https://blog.pragmaticengineer.com/an-educational-side-project/?fbclid=IwAR0rf7BB9jZ2J9goLWGaXVae60Yi84ETBebXKVIbmaoQg5eCpxPTo1TZaLk)
+  where he introduced a really innovative project idea. I'm going to attempt to
+  build it out and document my progress here.
+</Callout>
+
+Until now, I've been doing small projects as a mean to learn new technology and concepts. The method served me well in my endeavour and I've learned a lot.
+However, I've always felt that I'm missing something. I've never had the chance to work on a project that is big enough to have a full picture of the whole system.
+
+After reading an article on a very cool side project, I've found the perfect opportunity to build something analogous and,
+simultaneously, learn Go, a language I've been wanting to try for a long time.
+
+## The idea
+
+TThe objective is to create a system capable of simulating the entire process of a food delivery service like DoorDash
+or UberEat, from the moment a customer orders food to its delivery. Additionally, a frontend is needed to visualize the
+system in action. I'll adapt the map concept from the article above with some modifications.
+
+## Design
+
+There should be one main Go backend service to manage all the logic, and a smaller client will act as fake shippers,
+customers, and restaurants to place, accept, and deliver orders. The frontend, written in React, is not for customer or
+restaurant interactions but merely for visualizing the system.
+
+<Image
+  src="/images/blog/doordash-clone.jpg"
+  width="718"
+  height="404"
+  alt="Image"
+  className="rounded"
+/>
+
+I aim to build everything using standard libraries in Go and will attempt to avoid third-party libraries as much as
+possible. Learning is the primary goal here, so time is not a significant concern.
