@@ -87,18 +87,21 @@ export const Project = defineDocumentType(() => ({
       type: "string",
       required: true,
     },
-    description: {
+    description1: {
       type: "string",
       required: true,
     },
-    }
+    description2: {
+      type: "string",
+      required: true,
+    },
   },
   computedFields,
 }));
 
 export default makeSource({
   contentDirPath: "./content",
-  documentTypes: [Post, About],
+  documentTypes: [Post, About, Project],
   mdx: {
     remarkPlugins: [remarkGfm],
     rehypePlugins: [
