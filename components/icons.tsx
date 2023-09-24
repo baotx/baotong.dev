@@ -24,6 +24,7 @@ import {
   User,
   Linkedin,
   Link,
+  Download,
   X,
   type IconNode,
 } from "lucide-react";
@@ -73,4 +74,5 @@ export const Icons = {
   check: Check,
   linkedin: Linkedin,
   link: Link,
+  download: Download,
 };

@@ -32,6 +32,13 @@ export function Profile() {
           <Link className="hover:underline" href="/projects">
             Projects
           </Link>
+          {" · "}
+          <Link
+            className="hover:underline"
+            href="https://www.dropbox.com/s/7rqcoog9h6zmu7m/BaoTong-Resume-v0.1.pdf?dl=1"
+          >
+            Resume <Icons.download className="inline-block h-3 w-3" />
+          </Link>
         </p>
         <p>
           I am a software engineer based in Sydney. Learning about scalable
