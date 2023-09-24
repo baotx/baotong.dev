@@ -23,6 +23,7 @@ import {
   Twitter,
   User,
   Linkedin,
+  Link,
   X,
   type IconNode,
 } from "lucide-react";
@@ -71,4 +72,5 @@ export const Icons = {
   twitter: Twitter,
   check: Check,
   linkedin: Linkedin,
+  link: Link,
 };
