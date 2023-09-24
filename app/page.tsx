@@ -1,3 +1,3 @@
-export default function Home() {
-  return <div className="container relative">tests</div>;
-}
+import AboutPage from "@/app/about/page";
+
+export default AboutPage;

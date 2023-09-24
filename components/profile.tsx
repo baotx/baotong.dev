@@ -19,7 +19,20 @@ export function Profile() {
           className="rounded-full"
         />
       </div>
-      <div className="mt-6 space-y-7 text-sm text-slate-400">
+      <div className="mt-6 space-y-7 text-sm text-slate-600 dark:text-slate-300">
+        <p>
+          <Link className="hover:underline" href="/about">
+            About
+          </Link>
+          {" · "}
+          <Link className="hover:underline" href="/blogs">
+            Blogs
+          </Link>
+          {" · "}
+          <Link className="hover:underline" href="/projects">
+            Projects
+          </Link>
+        </p>
         <p>
           I am a software engineer based in Sydney. Learning about scalable
           webapp.
