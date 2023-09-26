@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Profile } from "@/components/profile";
+import Script from "next/script";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -31,6 +32,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=G-JB531XVXS6`}
+      />
+      <Script id="google-analytics">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+ 
+          gtag('config', 'G-JB531XVXS6');
+        `}
+      </Script>
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
