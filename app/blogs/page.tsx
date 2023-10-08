@@ -5,7 +5,7 @@ import Link from "next/link";
 export default async function Page() {
   return (
     <div className="grid gap-4 sm:grid-cols-2 py-4">
-      {allPosts.map((post) => (
+      {allPosts.sort((a, b) => Date.parse(b.date) - Date.parse(a.date)).map((post) => (
         <article
           key={post.slugAsParams}
           className="group relative border-solid border-2 rounded-md bg-secondary p-4"

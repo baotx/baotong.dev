@@ -1,0 +1,125 @@
+---
+title: "#1: Setting up CI/CD pipeline"
+description: I just want to code without worrying about deployment
+date: "2023-10-07"
+---
+
+At the beginning of any project, I usually set up a CI/CD pipeline using GitHub Actions. Based on my personal experience, this process often takes longer than expected.
+
+## Project setup
+
+I'll use a monorepo approach to kick off the project. There's no specific reason for choosing a monorepo; it's just that this project will likely be small, and I don't want the hassle of switching repositories during development.
+
+Firstly, I'll code a basic HTTP server in Go:
+
+```go
+// main.go
+func main() {
+  // Setup server
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, "Hello world, it's restaurant service")
+	})
+	server := &http.Server{Addr: ":8080"}
+
+	go func() {
+		log.Println("Starting RESTAURANT server on port 8080")
+
+		err := server.ListenAndServe()
+		if err != nil {
+			log.Printf("Error starting RESTAURANT server: %s\n", err)
+			os.Exit(1)
+		}
+	}()
+
+	// Trap sigterm or interrupt and gracefully shutdown the server
+	c := make(chan os.Signal, 1)
+	signal.Notify(c, os.Interrupt, os.Kill)
+
+	// Block until a signal is received.
+	sig := <-c
+	log.Printf("Got signal: %s, exiting.", sig)
+
+	// Gracefully shutdown the server
+	ctx, _ := context.WithTimeout(context.Background(), 30*time.Second)
+	server.Shutdown(ctx)
+}
+```
+
+Copying this 3 more times, and we have a neat microserves :). After that, there should be a separate Dockerfile for each server.
+Then, I can use a docker-compose.yml to get them running. The directory structure would probably look like this:
+
+```txt
+├── delivery
+│   ├── Dockerfile
+│   ├── go.mod
+│   └── main.go
+├── order
+│   └── ... (same as above)
+├── user
+│   └── ... (same as above)
+├── restaurant
+│   └── ... (same as above)
+├── docker-compose.yaml
+└── go.work
+```
+
+This is easy little work. The real challenge is deploying this setup automatically whenever there are new changes.
+
+## Deployment
+
+The setup above comes from my plan to deploy everything onto a single VM. That's why it's beneficial to have them all in one repository. It also makes it convenient to use a single GitHub Action to deploy them all.
+I still have some AWS credits left from my "Startup-Founder-Wannabe" phase, so I'm going to utilize those. I'll quickly set up a `t2.micro` server, configure the DNS for [delivery.baotong.dev](delivery.baotong.dev) to point to that EC2, install Docker on it, and we're good to go.
+
+Now, I need to create a GitHub Action for deployment. I had a tough time getting this to work.
+
+I first attempted to SSH into the EC2 instance, copy the code over, and run the `docker compose up` command. This approach didn't work out because while copying, it would replace the new files without deleting the old ones.
+
+Next, I tried using rsync, then building the images on the instance and running `compose up`. This method didn't work either. I faced some connectivity issues when it took too long, and for some reason, it lasted over 15 minutes per action run.
+
+And finally, with a bit of googling and chatGPTing, I decided to build the images using GitHub Actions, push them to a public registry, rsync the compose file to the EC2, and then pull and run them there. This worked flawlessly.
+
+```yml
+// .github/workflows/deploy.yaml
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Push to EC2 Instance
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v4
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build docker images
+        run: |
+          docker compose build
+          docker compose push
+
+      - name: Deploy to my EC2 instance
+        uses: easingthemes/ssh-deploy@v4
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+          SOURCE: "./"
+          REMOTE_HOST: ${{ secrets.EC2_HOST }}
+          REMOTE_USER: ubuntu
+          TARGET: "/home/ubuntu/food-delivery"
+          SCRIPT_BEFORE: ls
+          SCRIPT_AFTER: |
+            docker compose -f "./food-delivery/docker-compose.yaml" pull
+            docker compose -f "./food-delivery/docker-compose.yaml" up -d
+```
+
+This resulted in an efficient workflow where any changes to the main branch would automatically update and run the latest version on the server.
+My next steps are to route the services through nginx and establish a testing pipeline.
