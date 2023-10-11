@@ -12,7 +12,7 @@ export function Profile() {
       </Link>
       <div className="w-32 h-32 m-4">
         <Image
-          src="/images/avatars/ryantong.jpg"
+          src="/images/avatars/ryantong1.jpg"
           alt="Ryan Tong"
           width="150"
           height="150"
