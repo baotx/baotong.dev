@@ -1,0 +1,53 @@
+---
+title: "#2: Setting up CI/CD pipeline (Part 2)"
+description: Setup development environment using cosmtrek/air
+date: "2023-10-22"
+---
+
+While learning Go, I discovered an incredible hot reload package for Go development.
+Today, I want to set it up with a Dockerfile. The goal is to make it easy for anyone,
+whether it's a new machine or a collaborator joining the development,
+to start working with minimal setup requirements. All they need is **Docker**.
+
+To achieve this, they can simply set up a `docker-compose.override.yaml` file by copying the
+`docker-compose.development.yaml` configuration, run the Docker Compose, and voilà!
+They can start tinkering with the code without worrying about dependencies and other hassles.
+
+## The updated dockerfile
+
+The updated dockerfile looks like this. I added a development stage,
+in it we only need to use `cosmtrek/air` docker image and that's it.
+
+```dockerfile
+# --- Build Stage ---
+FROM golang:1.21 AS builder
+
+WORKDIR /app
+
+COPY go.mod ./
+RUN go mod download
+
+COPY *.go ./
+
+RUN CGO_ENABLED=0 GOOS=linux go build -o /user
+
+# --- Development Stage ---
+FROM cosmtrek/air AS development
+
+WORKDIR /app
+
+EXPOSE 8080
+
+CMD ["air"]
+
+# --- Final Stage ---
+FROM alpine:latest
+
+COPY --from=builder /user /user
+
+EXPOSE 8080
+
+CMD ["/user"]
+```
+
+I've been loving this setup, it took a while but I can forget about the deployment for awhile. Now let the coding begin
