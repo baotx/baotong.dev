@@ -27,7 +27,7 @@ export default async function Page({ params }: PageProps) {
 
   return (
     <article className="container relative">
-      <div>
+      <div className="pb-3">
         {post.date && (
           <time
             dateTime={post.date}
