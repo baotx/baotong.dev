@@ -52,14 +52,14 @@ export default function RootLayout({
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-          <div className="container mx-auto ">
+          <div className="container mx-auto px-0">
             <div className="flex flex-col items-center py-6 lg:flex-row lg:items-start">
-              <aside className="bg-white-600 px-2 w-1/4">
+              <aside className="bg-white-600 px-2 w-full md:w-1/4">
                 <div className="sticky top-0 w-full p-4 text-center">
                   <Profile />
                 </div>
               </aside>
-              <main className="px-6 w-full md:max-w-3xl">{children}</main>
+              <main className="px-0 w-full md:px-6 md:max-w-3xl">{children}</main>
             </div>
           </div>
         </ThemeProvider>

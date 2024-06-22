@@ -31,7 +31,7 @@ export default async function Page({ params }: PageProps) {
         {post.date && (
           <time
             dateTime={post.date}
-            className="block text-sm text-muted-foreground"
+            className="block text-sm text-muted-foreground pb-2"
           >
             Published on {formatDate(post.date)}
           </time>
