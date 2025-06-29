@@ -35,7 +35,7 @@ export function Profile() {
           {" · "}
           <Link
             className="hover:underline"
-            href="https://www.dropbox.com/scl/fi/wbtzomyd090hwdwlnruf7/RyanTong-Resume-v1.0.pdf?rlkey=1g1oz2fucmt1h9zxvy4xcsz8w&dl=1"
+            href="https://www.dropbox.com/scl/fi/zatmpoivvf5posl5ctcmv/RyanTong-Resume-v2.1-29062025.pdf?rlkey=6hg9xlvtuorg3skwgxhuxq54a&st=d4jqjjl1&dl=1"
           >
             Resume <Icons.download className="inline-block h-3 w-3" />
           </Link>
@@ -45,13 +45,13 @@ export function Profile() {
           webapp.
         </p>
         <p>
-          <Link href="https://github.com/tongxuanbao">
+          <Link href="https://github.com/baotx">
             <Button variant="ghost" size="sm" className="px-1 h-[32px]">
               <Icons.github className="h-6 w-6 text-curentColor" />
               <span className="sr-only">Github</span>
             </Button>
           </Link>
-          <Link href="https://www.linkedin.com/in/baotongxuan/">
+          <Link href="https://www.linkedin.com/in/baotx/">
             <Button variant="ghost" size="sm" className="h-8 w-8 px-0">
               <Icons.linkedin className="" />
               <span className="sr-only">Toggle theme</span>

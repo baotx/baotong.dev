@@ -8,6 +8,8 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Profile } from "@/components/profile";
 import Script from "next/script";
 
+import NextTopLoader from "nextjs-toploader";
+
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -52,6 +54,7 @@ export default function RootLayout({
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          <NextTopLoader />
           <div className="container mx-auto px-0">
             <div className="flex flex-col items-center py-6 lg:flex-row lg:items-start">
               <aside className="bg-white-600 px-2 w-full md:w-1/4">
@@ -59,7 +62,9 @@ export default function RootLayout({
                   <Profile />
                 </div>
               </aside>
-              <main className="px-0 w-full md:px-6 md:max-w-3xl">{children}</main>
+              <main className="px-0 w-full md:px-6 md:max-w-3xl">
+                {children}
+              </main>
             </div>
           </div>
         </ThemeProvider>
