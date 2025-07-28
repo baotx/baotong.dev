@@ -41,8 +41,8 @@ export function Profile() {
           </Link>
         </p>
         <p>
-          I am a software engineer based in Sydney. Learning about scalable
-          webapp.
+          I am a senior software engineer based in Sydney. Passionate about
+          scalable webapp.
         </p>
         <p>
           <Link href="https://github.com/baotx">
